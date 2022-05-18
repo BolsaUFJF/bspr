@@ -9,11 +9,11 @@
     toastr.success('Operação realizada com sucesso!', 'Sucesso!')
 
     document.getElementById('title').innerHTML = "Sucesso"
-    document.getElementById('resultado').innerHTML = "A rede foi deletada com sucesso" +
+    document.getElementById('resultado').innerHTML = "Usuário deletado com sucesso!" +
     "<div class='row'>"+
         "<div class='col-lg-5'></div>"+
         "<div class='col-lg-2'>"+
-            "<a href='/listarRedes' class='btn btn-light'>Listar Redes</a>"    +
+            "<a href='/user/get' class='btn btn-light'>Listar Usuários</a>"    +
         "</div>"+    
         "<div class='col-lg-5'></div>"+   
     "</div>";

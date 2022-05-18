@@ -45,19 +45,12 @@ router.get("/getUsers", async (req, res) => {
 });
 
 router.post('/delete', async (req, res) => {
-
-	userId = req.body.userId
-	userName = req.body.userName
-
-	UserDatabase.findByIdAndDelete(userId, function (err) {
-		// if (err) res.redirect('/resultDelete?msg=error');
-		// res.redirect('/resultDelete?msg=success');
-		if(err) console.log(err);
-		console.log("Success");
+	userId = req.body.userId;
+	const query = {_id: userId}
+	UserDatabase.deleteOne(query, function (err) {
+		if(err) res.redirect('/resultDelete?msg=error');
+		res.redirect('/resultDelete?msg=success');   
 	});
-
-
-
 });
 
 

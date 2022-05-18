@@ -1,14 +1,11 @@
 const axios = require('axios');
 require("dotenv").config();
-console.log(process.env) 
 // const integrate = require('./integrate').getBaseRoute();
 
 // const provToBlockchain = require('../integrateApi/provToBlockchain')
 const convertJWT = require('../controller/convertJWT')
 
-// const baseURL = "https://api-provenance.herokuapp.com";
-const baseURL = "http://localhost:3333";
-// const baseURL = process.env.URL;
+const baseURL = process.env.API_URL;
 
 
 async function used(activity, entity, userPki) {

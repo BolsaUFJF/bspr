@@ -31,10 +31,12 @@ app.use(express.static(__dirname + '/node_modules/moment/min'));
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var proArticleRouter = require('./routes/proArticle');
+var companyRouter = require('./routes/company');
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-app.use('/pro_article', proArticleRouter)
+app.use('/pro_article', proArticleRouter);
+app.use('/company/', companyRouter);
 //------END
 
 // catch 404 and forward to error handler

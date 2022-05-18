@@ -3,9 +3,7 @@ require("dotenv").config();
 
 // const integrate = require('./integrate').getBaseRoute();
 
-// const baseURL = "https://api-provenance.herokuapp.com";
-const baseURL = "http://localhost:3333";
-// const baseURL = process.env.URL_API;
+const baseURL = process.env.API_URL;
 
 const DocumentDatabase = require("../database/models/DocumentModel");
 
