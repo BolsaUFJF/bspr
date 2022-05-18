@@ -1,0 +1,78 @@
+<%- include('../head'); -%>
+<%- include('../sidebar'); -%>
+<%- include('../header'); -%>
+
+
+<div class="content-wrap">
+
+	<div class="main">
+		<div class="container-fluid">
+			<!-- /# row -->
+			<section id="main-content">
+				<div class="row">
+
+					<div class="col-lg-12">
+
+						<div class="card">
+							<div class="card-title">
+								<h3>Enviar Documentos</h3>
+							</div>
+
+							<div class="col-md-12" style="font-size: x-large;">
+
+								<form id="saveIoT" method="POST" action="/pro_article/uploadData" enctype="multipart/form-data">
+
+									<h4 style="text-align: center;">Informações de Envio</h3>
+
+									<div class="form-row">
+										<div class="form-group col-md-12">
+											<label for="labelPkiUser">Usuário Responsável:</label>
+											<select class="form-control" aria-label="Selecione o usuário" id="userPki" name="userPki">
+												<option value="user1" selected>user1</option>
+												<!-- <option value="user2">user2</option>
+												<option value="user3">user3</option> -->
+											</select>
+										</div>
+									</div>
+									
+									<div class="form-row">
+										<div class="form-group col-md-12">
+											<label for="formFileLg" class="form-label">Ecolha o Arquivo para Upload</label>
+											<input class="input" id="file" name="file" type="file">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-5"></div>
+										<div class="form-group col-md-12 text-center">
+											<button type="submit" class="btn btn-success">Enviar</button>
+										</div>
+										<div class="col-lg-5"></div>
+									</div>
+									
+
+								</form>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<script src="/js/proArticleHelper.js"></script>
+
+
+<!-- <script>
+	// Add the following code if you want the name of the file appear on select
+	$(".custom-file-input").on("change", function() {
+	  var fileName = $(this).val().split("\\").pop();
+	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+</script> -->
+
+<%- include('../importScript'); -%>
