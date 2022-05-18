@@ -1,13 +1,13 @@
 # Projeto
  
-![GitHub repo size](https://img.shields.io/github/repo-size/romulolassoares/Blockchain-e-Proveniencia?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/romulolassoares/Blockchain-e-Proveniencia?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/BolsaUFJF/bspr?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/BolsaUFJF/bspr?style=for-the-badge)
  
 ## 💻 Sobre o projeto
  
 Repositório referente ao projeto de Iniciação Científica da Universidade Federal de Juiz de Fora, voltado ao estudo da proveniência de dados em uma rede de Blockchain para dispositivos IIoT.
- ---
-## Funcionalidades
+ <!-- --- -->
+<!-- ## Funcionalidades
 O sistema possui as seguintes funcionalidade
  
 * criar uma rede de Blockchain, utilizando do Hyperledger Fabric
@@ -39,16 +39,15 @@ Após a instalação das dependências reinicie sua máquina e execute o seguint
 ```console
 curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.2 1.4.9
 ```
----
-## ☕ Executando o código
+--- -->
+<!-- ## ☕ Executando o código
  
 Para executar, siga estas etapas:
  
 ```console
 npm install
  
-npm start
-```
+npm start -->
+<!-- ``` -->
 [⬆ Voltar ao topo](#projeto)<br>
- 
-Teste
+
