@@ -27,7 +27,7 @@ router.post('/start', async (req, res)=>{
   // const pathNetworks = networks + '/' + rededatabase.nomeRede;
 
   shell.cd(networks);
-  // shell.exec('./startFabric.sh javascript');
+  shell.exec('./startFabric.sh javascript');
   shell.cd(__dirname);
   shell.cd('..');
   // console.log(__dirname)
