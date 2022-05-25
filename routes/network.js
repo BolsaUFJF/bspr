@@ -21,17 +21,18 @@ router.get('/', function(req, res, next) {
 router.post('/start', async (req, res)=>{
   // console.log(req);
   const name = req.body.networkName;
-  //  const networks = path.resolve('networks', 'rede', 'chaincode');
-  //  console.log(networks);
-   // const pathNetworks = networks + '/' + rededatabase.nomeRede;
+  console.log(name);
+  const networks = path.resolve('networks', 'rede2', 'chaincode');
+  console.log(networks);
+  // const pathNetworks = networks + '/' + rededatabase.nomeRede;
 
-  //  shell.cd(networks);
-  //  shell.exec('./startFabric.sh javascript');
-  //  shell.cd(__dirname);
-  //  shell.cd('..');
-  //  console.log(__dirname)
-  if(name == "rede") res.redirect('/network?msg=success');
-  else res.redirect('/network?msg=error');
+  shell.cd(networks);
+  // shell.exec('./startFabric.sh javascript');
+  shell.cd(__dirname);
+  shell.cd('..');
+  // console.log(__dirname)
+  // if(name == "rede") res.redirect('/network?msg=success');
+  // else res.redirect('/network?msg=error');
 });
 
 
