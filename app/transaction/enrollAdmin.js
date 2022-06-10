@@ -13,7 +13,7 @@ const path = require('path');
 
 module.exports = {
 
-    async enrollAdmin(rede) {
+    async enrollAdminOrg1(rede) {
         try {
             // load the network configuration
             const ccpPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
@@ -26,7 +26,7 @@ module.exports = {
             const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
 
             // Create a new file system based wallet for managing identities.
-            const walletPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'chaincode','wallet')
+            const walletPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'chaincode','wallet', 'org1')
             // const walletPath = path.join(process.cwd(), 'app/controller/wallet');
             const wallet = await Wallets.newFileSystemWallet(walletPath);
     
@@ -48,7 +48,52 @@ module.exports = {
                 type: 'X.509',
             };
             await wallet.put('admin', x509Identity);
-            console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
+            console.log('Successfully enrolled admin user "admin" and imported it into the wallet of Org1');
+            return 1;
+
+        } catch (error) {
+            console.error(`Failed to enroll admin user "admin": ${error}`);
+            return 3;
+        
+        }
+    },
+
+    async enrollAdminOrg2(rede) {
+        try {
+            // load the network configuration
+            const ccpPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+            
+            const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
+    
+            // Create a new CA client for interacting with the CA.
+            const caInfo = ccp.certificateAuthorities['ca.org2.example.com'];
+            const caTLSCACerts = caInfo.tlsCACerts.pem;
+            const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
+
+            // Create a new file system based wallet for managing identities.
+            const walletPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'chaincode','wallet', 'org2')
+            // const walletPath = path.join(process.cwd(), 'app/controller/wallet');
+            const wallet = await Wallets.newFileSystemWallet(walletPath);
+    
+            // Check to see if we've already enrolled the admin user.
+            const identity = await wallet.get('admin');
+            if (identity) {
+                console.log('An identity for the admin user "admin" already exists in the wallet');
+                return 2;
+            }
+    
+            // Enroll the admin user, and import the new identity into the wallet.
+            const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
+            const x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'Org2MSP',
+                type: 'X.509',
+            };
+            await wallet.put('admin', x509Identity);
+            console.log('Successfully enrolled admin user "admin" and imported it into the wallet of Org2');
             return 1;
 
         } catch (error) {

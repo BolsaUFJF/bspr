@@ -16,14 +16,14 @@
 
             <div class="card">
               <div class="card-title">
-                <h3>New Company</h3>
+                <h3>New User to Org2</h3>
               </div>
               <br>
 
               <div class="row">
                 <div class="col-md-12" style="text-align: center; font-size: x-large;">
                   
-                  <form id="saveUser" method="POST" action="/user/save" enctype="application/json">
+                  <form id="saveUser" method="POST" action="/company/save" enctype="application/json">
 
                     <div class="row">
                       <div class="col-lg-12">
@@ -54,6 +54,30 @@
                             <div class="col-lg-8">
                               <textarea style="resize: none;" class="form-control" id="descricao" name="descricao"
                               placeholder="Digite a descrição do usuário" rows="4"></textarea>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                        
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <label for="labelPermissaoUsuario">Permissão:</label>
+                            </div>
+                            <div class="col-lg-8">
+                              
+                              <select class="form-control" id="permissao" name="permissao">
+                                <option style="color: rgb(70, 70, 70);" value="" disabled selected hidden>Selecione uma permissão</option>
+                                <option value="1">Leitura</option>
+                                <option value="2">Escrita</option>
+                                <option value="3">Leitura e Escrita</option>
+                              </select>
+
                             </div>
                           </div>
                         </div>

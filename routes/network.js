@@ -1,58 +1,93 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const mongodb = require('../app/database/mongodb/Server')
+const mongodb = require("../app/database/mongodb/Server");
+const fs = require('fs');
 
-const path = require('path');
-const shell = require('shelljs');
+const path = require("path");
+const shell = require("shelljs");
 
+const integrateApi = require("../app/integrateApi/relationships");
 
-const integrateApi = require('../app/integrateApi/relationships')
+const rede = require("../network.json")
+const enrollAdmin = require('../app/transaction/enrollAdmin')
+
+const scripts = require("../app/controller/scripts")
 
 // const temp = require('../app/integrateApi/provToBlockchain')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  // temp.provenanceToBlockchain();
-  res.render('network/index',{
-    css: ''
-  });
+router.get("/", function (req, res, next) {
+	// temp.provenanceToBlockchain();
+	res.render("network/index", {
+		css: "",
+	});
 });
 
-router.post('/start', async (req, res)=>{
-  // console.log(req);
-  const name = req.body.networkName;
-  console.log(name);
-  const networks = path.resolve('networks', 'rede2', 'chaincode');
-  console.log(networks);
-  // const pathNetworks = networks + '/' + rededatabase.nomeRede;
+router.get("/start/:networkName", async (req, res) => {
+	// console.log(req);
+	const name = req.params.networkName;
+	console.log(name);
 
-  shell.cd(networks);
-  shell.exec('./startFabric.sh javascript');
-  shell.cd(__dirname);
-  shell.cd('..');
-  // console.log(__dirname)
-  // if(name == "rede") res.redirect('/network?msg=success');
-  // else res.redirect('/network?msg=error');
+	await scripts.startNetwork(name);
+
+	if (name == "rede2") res.redirect("/network?msg=success");
+	else res.redirect("/network?msg=error");
 });
 
+router.get('/stop/:networkName', async (req, res)=>{
+	// console.log(req);
+	const name = req.params.networkName;
+	console.log(name);
 
-router.get('/listarRedes', function(req, res, next) {
-  res.render('rede/listarRedes',{
-    css: ''
-  });
+	await scripts.stopNetwork(name);
+
+	// console.log(__dirname)
+	if (name == "rede2") res.redirect("/network?msg=success");
+	else res.redirect("/network?msg=error");
 });
 
-router.get('/result', function(req, res, next) {
-  res.render('results/result',{
-    css: ''
-  });
+router.get("/listarRedes", function (req, res, next) {
+	res.render("rede/listarRedes", {
+		css: "",
+	});
 });
 
-router.get('/resultDelete', function(req, res, next) {
-  res.render('results/resultDelete',{
-    css: ''
-  });
+router.get("/result", function (req, res, next) {
+	res.render("results/result", {
+		css: "",
+	});
 });
 
+router.get("/resultDelete", function (req, res, next) {
+	res.render("results/resultDelete", {
+		css: "",
+	});
+});
+
+router.get("/enrollAdmin", async (req, res) => {
+	resultado = 0;
+	resultado2 = 0;
+
+	// console.log(rede)
+
+	if (rede.isOnline === true) {
+		resultado = await enrollAdmin.enrollAdminOrg1(rede);
+		resultado2 = await enrollAdmin.enrollAdminOrg2(rede);
+	} else {
+		console.log("Nenhuma rede iniciada!!!!");
+		resultado = 3;
+	}
+
+	if (resultado == 1 && resultado2 == 1) {
+		res.send(JSON.parse('{ "result":"success"}'));
+		// res.redirect("/network?msg=success");
+	} else if (resultado == 2) {
+		res.send(JSON.parse('{ "result":"exists"}'));
+		// res.redirect("/network?msg=exists");
+	} else if (resultado == 3) {
+		res.send(JSON.parse('{ "result":"error"}'));
+		// res.redirect("/network?msg=error");
+	}
+});
 
 module.exports = router;

@@ -138,6 +138,7 @@ router.post('/save', async (req, res) => {
             "message": "Company " + userPki + " not find"
          }
       }
+      console.log(status)
       await relationship.wasGeneratedBy(entity, activitySendDocument, userPki);
 
       res.redirect('/pro_article?msg=compdestinationerror');

@@ -1,0 +1,19 @@
+{
+   "nomeRede": "rede2",
+   "descricaoRede": "desc",
+   "Org": [
+      {
+         "nomeOrg": "Org1",
+         "numPeer": "2"
+      },
+      {
+         "nomeOrg": "Org2",
+         "numPeer": "2"
+      }
+   ],
+   "nomeCanal": "canal",
+   "isOnline": true,
+   "Data_de_Criação": {
+      "$date": "2022-06-07T11:44:36.816Z"
+   }
+}
