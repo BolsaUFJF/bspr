@@ -2,7 +2,7 @@ const axios = require('axios');
 require("dotenv").config();
 // const integrate = require('./integrate').getBaseRoute();
 
-// const provToBlockchain = require('../integrateApi/provToBlockchain')
+const provToBlockchain = require('../integrateApi/provToBlockchain')
 const convertJWT = require('../controller/convertJWT')
 
 const baseURL = process.env.API_URL;
@@ -22,7 +22,7 @@ async function used(activity, entity, userPki) {
       "node2": await convertJWT.handle(entity),
       "relationship": "WAS_USED"
    }
-   // await provToBlockchain.singleData(userPki, data)
+   await provToBlockchain.singleData(userPki, data)
 }
 
 async function wasGeneratedBy(entity, activity, userPki) {
@@ -39,7 +39,7 @@ async function wasGeneratedBy(entity, activity, userPki) {
       "node2": await  convertJWT.handle(entity),
       "relationship": "WAS_GENERATED_BY"
    }
-   // await provToBlockchain.singleData(userPki, data)
+   await provToBlockchain.singleData(userPki, data)
 }
 
 async function wasAssociatedWith(activity, agent, userPki) {
@@ -58,7 +58,7 @@ async function wasAssociatedWith(activity, agent, userPki) {
       "node2": await convertJWT.handle(agent),
       "relationship": "WAS_ASSOCIATED_WITH"
    }
-   // await provToBlockchain.singleData(userPki, data)
+   await provToBlockchain.singleData(userPki, data)
 
 }
 
@@ -76,7 +76,7 @@ async function wasAttribuitedTo(entity, agent, userPki) {
       "node2": await  convertJWT.handle(entity),
       "relationship": "WAS_ATTRIBUITED_TO"
    }
-   // await provToBlockchain.singleData(userPki, data)
+   await provToBlockchain.singleData(userPki, data)
 }
 
 async function wasInformedBy(activity1, activity2, userPki) {
@@ -93,7 +93,7 @@ async function wasInformedBy(activity1, activity2, userPki) {
       "node2": await  convertJWT.handle(activity2),
       "relationship": "WAS_INFORMED_BY"
    }
-   // await provToBlockchain.singleData(userPki, data)
+   await provToBlockchain.singleData(userPki, data)
 }
 
 async function wasDerivedFrom(entity1, entity2, userPki) {
@@ -110,7 +110,7 @@ async function wasDerivedFrom(entity1, entity2, userPki) {
       "node2": await  convertJWT.handle(entity2),
       "relationship": "WAS_DERIVED_FROM"
    }
-   // await provToBlockchain.singleData(userPki, data)
+   await provToBlockchain.singleData(userPki, data)
 }
 
 async function actedOnBehalfOf(agent1, agent2, userPki) {
@@ -127,7 +127,7 @@ async function actedOnBehalfOf(agent1, agent2, userPki) {
       "node2": await  convertJWT.handle(agent2),
       "relationship": ""
    }
-   // await provToBlockchain.singleData(userPki, data)
+   await provToBlockchain.singleData(userPki, data)
 }
 
 module.exports = {

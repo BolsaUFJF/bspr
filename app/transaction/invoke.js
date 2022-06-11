@@ -21,7 +21,7 @@ module.exports = {
             
 
             // Create a new file system based wallet for managing identities.
-            const walletPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'chaincode','wallet');
+            const walletPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'chaincode','wallet', 'org1');
             const wallet = await Wallets.newFileSystemWallet(walletPath);
             console.log(`Wallet path: ${walletPath}`);
 
