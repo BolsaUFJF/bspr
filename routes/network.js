@@ -6,6 +6,9 @@ const fs = require('fs');
 const path = require("path");
 const shell = require("shelljs");
 
+const UserDatabase = require("../app/database/models/UserModel");
+const CompanyDatabase = require("../app/database/models/CompanyModel");
+
 const integrateApi = require("../app/integrateApi/relationships");
 
 const rede = require("../network.json")
@@ -40,6 +43,13 @@ router.get('/stop/:networkName', async (req, res)=>{
 	console.log(name);
 
 	await scripts.stopNetwork(name);
+
+	UserDatabase.deleteMany({}, function (err) {
+		if(err) console.log(err);
+	});
+	CompanyDatabase.deleteMany({}, function (err) {
+		if(err) console.log(err);
+	});
 
 	// console.log(__dirname)
 	if (name == "rede2") res.redirect("/network?msg=success");

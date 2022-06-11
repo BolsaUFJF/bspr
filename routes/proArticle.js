@@ -12,12 +12,15 @@ const query = require('../app/transaction/query')
 
 // const RedeDatabase = require('../app/database/models/RedeModel')
 const UserDatabase = require('../app/database/models/UserModel')
+const CompanyDatabase = require('../app/database/models/CompanyModel')
 const DocumentDatabase = require('../app/database/models/DocumentModel')
 
 const relationship = require('../app/integrateApi/relationships');
 const provenanceData = require('../app/integrateApi/provenanceData')
 
 const provToBlockchain = require('../app/integrateApi/provToBlockchain')
+
+const rede = require("../network.json")
 
 const axios = require('axios');
 
@@ -109,14 +112,15 @@ router.get('/getDocs', async (req, res) => {
 
 router.post('/save', async (req, res) => {
    const { userPki, companyOrigin, companyDestination, documetName } = req.body;
-   const transactionID = uuidv4();
+   const transactionID = "Block:" + uuidv4();
    const provenanceID = uuidv4();
    const timestamp = Date.now();
 
 
    const requisition = "Send Document"
 
-   var resultCompanyDestination = await UserDatabase.findOne({ pki: companyDestination })
+   var resultCompanyOrigin = await UserDatabase.findOne({ pki: companyOrigin })
+   var resultCompanyDestination = await CompanyDatabase.findOne({ pki: companyDestination })
    var document = await provenanceData.getEntityByName(documetName);
 
    if (resultCompanyDestination === null) {
@@ -146,32 +150,88 @@ router.post('/save', async (req, res) => {
    } else {
       var antes = Date.now(); // Start Time
 
+      if(rede.isOnline === true) {
+         var resultTransaction = await invoke.saveProArticle(transactionID, companyOrigin, companyDestination, JSON.stringify(document), requisition, rede);
+      } else {
+         console.log("Nenhuma rede iniciada!!!!");
+         resultTransaction = 3;
+      }
+
       var depois = Date.now()
       var duracao = depois - antes; // End Time
       console.log("levou " + duracao + "ms");
-      var entity = document;
 
-      const agent = {
-         "name": resultCompanyDestination.nome,
-         "provType": "agent-user",
-         "data": {
-            "pki": resultCompanyDestination.pki,
-            "network": resultCompanyDestination.network
+      if( resultTransaction == 1) {
+         var entity = document;
+
+         const agent = {
+            "name": resultCompanyOrigin.nome,
+            "provType": "agent-user",
+            "data": {
+               "pki": resultCompanyOrigin.pki,
+               "network": resultCompanyOrigin.network
+            }
          }
+
+         const activitySendDocument = {
+            "name": "Send Document#" + uuidv4(),
+            "provType": "send-document",
+            "start_time": antes.toString(),
+            "end_time": depois.toString()
+         }
+
+         entity.data = parseJwt(entity.data);
+
+         await relationship.wasAssociatedWith(activitySendDocument, agent, userPki)
+         await relationship.used(activitySendDocument, entity, userPki)
+
+      } else if(resultTransaction == 2) {
+         const status = "invalid user"
+
+         const activitySendDocument = {
+            "name": "Send Document ",
+            "provType": "send-document",
+            "start_time": 0,
+            "end_time": 0
+         }
+   
+         const entity = {
+            "name": "Error#" + uuidv4(),
+            "provType": "error",
+            "data": {
+               "status": status,
+               "code": "0x0001f",
+               "message": "Invalid User"
+            }
+         }
+         console.log(status)
+         await relationship.wasGeneratedBy(entity, activitySendDocument, userPki);
+
+         res.redirect('/transaction?msg=usererror');
+
+      } else if(resultTransaction == 3) {
+         const status = "internal error"
+         const activitySendDocument = {
+            "name": "Send Document ",
+            "provType": "send-document",
+            "start_time": 0,
+            "end_time": 0
+         }
+   
+         const entity = {
+            "name": "Error#" + uuidv4(),
+            "provType": "error",
+            "data": {
+               "status": status,
+               "code": "0x0001c",
+               "message": "Internal Error"
+            }
+         }
+         console.log(status)
+         await relationship.wasGeneratedBy(entity, activitySendDocument, userPki);
+         
+         res.redirect('/transaction?msg=internalerror');
       }
-
-      const activitySendDocument = {
-         "name": "Send Document#" + uuidv4(),
-         "provType": "send-document",
-         "start_time": antes.toString(),
-         "end_time": depois.toString()
-      }
-
-      entity.data = parseJwt(entity.data);
-
-      await relationship.wasAssociatedWith(activitySendDocument, agent, userPki)
-      await relationship.used(activitySendDocument, entity, userPki)
-
 
       const query = {name: documetName}
       DocumentDatabase.deleteOne(query, function (err) {

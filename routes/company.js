@@ -5,7 +5,8 @@ const router = express.Router();
 // const CompanyDatabase = require("../app/database/models/CompanyModel");
 const rede = require("../network.json")
 
-const UserDatabase = require("../app/database/models/UserModel");
+// const UserDatabase = require("../app/database/models/UserModel");
+const CompanyDatabase = require("../app/database/models/CompanyModel");
 const registerUser = require("../app/transaction/registerUserOrg");
 
 router.get("/", (req, res) => {
@@ -34,13 +35,13 @@ router.post("/save", async (req, res) => {
 	if(result != 1) {
 		res.redirect('/user/get');
 	} else if (result === 1) {
-		const userDatabase = new UserDatabase({
+		const companyDatabase = new CompanyDatabase({
 			nome: nome,
 			descricao: descricao,
 			permissao: permissao,
 			pki: pki
 		});
-		await userDatabase.save();
+		await companyDatabase.save();
 		res.redirect("/company/get");
 	}
 });
