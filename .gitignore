@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 networks/rede2
-tmp/
+tmp/uploads
