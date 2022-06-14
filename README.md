@@ -9,6 +9,11 @@ Repositório referente ao projeto de Iniciação Científica da Universidade Fed
  ---
  ## Funcionalidades
 O sistema possui as seguintes funcionalidades:
+* Iniciar uma rede de Blockchain
+* Cadastrar usuários nas organizações da rede
+* Efetuar o upload de Documentos
+* Enviar documentos dentro da rede de Blockchain
+* Efetuar a captura de erros através da api: https://github.com/BolsaUFJF/api-provenance
  
 <!-- * criar uma rede de Blockchain, utilizando do Hyperledger Fabric
 * Executar transações na última rede que está em execução
