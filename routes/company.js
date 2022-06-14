@@ -1,11 +1,6 @@
-const { response } = require("express");
 const express = require("express");
 const router = express.Router();
-
-// const CompanyDatabase = require("../app/database/models/CompanyModel");
-const rede = require("../network.json")
-
-// const UserDatabase = require("../app/database/models/UserModel");
+const rede = require("../network.json");
 const CompanyDatabase = require("../app/database/models/CompanyModel");
 const registerUser = require("../app/transaction/registerUserOrg");
 

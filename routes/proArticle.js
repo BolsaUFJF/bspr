@@ -139,11 +139,11 @@ router.post('/save', async (req, res) => {
          "data": {
             "status": status,
             "code": "0x0001d",
-            "message": "Company " + userPki + " not find"
+            "message": "Company " + companyOrigin + " not find"
          }
       }
       console.log(status)
-      await relationship.wasGeneratedBy(entity, activitySendDocument, userPki);
+      await relationship.wasGeneratedBy(entity, activitySendDocument, companyOrigin);
 
       res.redirect('/pro_article?msg=compdestinationerror');
 
@@ -182,8 +182,8 @@ router.post('/save', async (req, res) => {
 
          entity.data = parseJwt(entity.data);
 
-         await relationship.wasAssociatedWith(activitySendDocument, agent, userPki)
-         await relationship.used(activitySendDocument, entity, userPki)
+         await relationship.wasAssociatedWith(activitySendDocument, agent, companyOrigin)
+         await relationship.used(activitySendDocument, entity, companyOrigin)
 
       } else if(resultTransaction == 2) {
          const status = "invalid user"
@@ -205,7 +205,7 @@ router.post('/save', async (req, res) => {
             }
          }
          console.log(status)
-         await relationship.wasGeneratedBy(entity, activitySendDocument, userPki);
+         await relationship.wasGeneratedBy(entity, activitySendDocument, companyOrigin);
 
          res.redirect('/transaction?msg=usererror');
 
@@ -228,7 +228,7 @@ router.post('/save', async (req, res) => {
             }
          }
          console.log(status)
-         await relationship.wasGeneratedBy(entity, activitySendDocument, userPki);
+         await relationship.wasGeneratedBy(entity, activitySendDocument, companyOrigin);
          
          res.redirect('/transaction?msg=internalerror');
       }

@@ -1,9 +1,6 @@
-const { response } = require("express");
 const express = require("express");
 const router = express.Router();
-
 const rede = require("../network.json")
-
 const UserDatabase = require("../app/database/models/UserModel");
 const registerUser = require("../app/transaction/registerUserOrg");
 

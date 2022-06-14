@@ -1,10 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const mongodb = require('../app/database/mongodb/Server')
-
-const integrateApi = require('../app/integrateApi/relationships')
-
-// const temp = require('../app/integrateApi/provToBlockchain')
+const mongodb = require('../app/database/mongodb/Server'); //Connection to database
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

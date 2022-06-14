@@ -1,33 +1,19 @@
 var express = require("express");
 var router = express.Router();
-const mongodb = require("../app/database/mongodb/Server");
-const fs = require('fs');
-
-const path = require("path");
-const shell = require("shelljs");
-
 const UserDatabase = require("../app/database/models/UserModel");
 const CompanyDatabase = require("../app/database/models/CompanyModel");
-
-const integrateApi = require("../app/integrateApi/relationships");
-
 const rede = require("../network.json")
 const enrollAdmin = require('../app/transaction/enrollAdmin')
-
 const scripts = require("../app/controller/scripts")
-
-// const temp = require('../app/integrateApi/provToBlockchain')
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-	// temp.provenanceToBlockchain();
 	res.render("network/index", {
 		css: "",
 	});
 });
 
 router.get("/start/:networkName", async (req, res) => {
-	// console.log(req);
 	const name = req.params.networkName;
 	console.log(name);
 
@@ -38,7 +24,6 @@ router.get("/start/:networkName", async (req, res) => {
 });
 
 router.get('/stop/:networkName', async (req, res)=>{
-	// console.log(req);
 	const name = req.params.networkName;
 	console.log(name);
 

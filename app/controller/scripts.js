@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 const path = require("path");
 const shell = require("shelljs");
 
@@ -7,7 +6,6 @@ const shell = require("shelljs");
 async function startNetwork(networkName) {
    const networks = path.resolve("networks", networkName, "chaincode");
 	console.log(networks);
-	// const pathNetworks = networks + '/' + rededatabase.nomeRede;
 
 	fs.rmSync(networks+"/wallet", { recursive: true, force: true });
 
@@ -41,7 +39,6 @@ async function startNetwork(networkName) {
 async function stopNetwork(networkName) {
 	const networks = path.resolve("networks", networkName);
 	console.log(networks);
-	// const pathNetworks = networks + '/' + rededatabase.nomeRede;
 
 	shell.cd(networks);
 	shell.exec("./network.sh down");
