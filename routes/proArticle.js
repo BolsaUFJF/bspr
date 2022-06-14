@@ -59,8 +59,15 @@ router.get('/uploadFile', function (req, res) {
       css: ''
    });
 });
+
 router.get('/new', function (req, res) {
    res.render('proArticle/cadastrar', {
+      css: ''
+   });
+});
+
+router.get('/get', function (req, res) {
+   res.render('proArticle/listar', {
       css: ''
    });
 });
@@ -332,5 +339,26 @@ router.post('/uploadData', multer(multerConfig).single('file'), async (req, res)
 router.get("/getDocuments", async (req, res) => {
    res.send(await DocumentDatabase.find());
 });
+
+router.get('/getTransactions', async (req, res) => {
+   var data = await query.getAllData("r01", rede);
+   var blockData = [];
+   var provData = [];
+
+   const jsonData = JSON.parse(data);
+
+   jsonData.forEach(element => {
+      if(element.Key.includes("Block")) {
+         element.Record.document = JSON.parse(element.Record.document);
+         blockData.push(element);
+      } else if(element.Key.includes("Prov")) {
+         provData.push(element);
+      }
+   });
+
+   console.log(blockData[0]);
+
+   res.send(blockData);
+})
 
 module.exports = router;

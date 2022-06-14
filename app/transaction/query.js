@@ -97,33 +97,33 @@ module.exports = {
         }
     },
 
-    async getAllData(user, rede) {
+    async getAllData(userPki, rede) {
         try {
             // load the network configuration
             const ccpPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
             const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
             // Create a new file system based wallet for managing identities.
-            const walletPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'chaincode','wallet');
+            const walletPath = path.resolve(__dirname, '..', '..', 'networks', rede.nomeRede, 'chaincode','wallet','org1');
             const wallet = await Wallets.newFileSystemWallet(walletPath);
             // console.log(`Wallet path: ${walletPath}`);
 
             // Check to see if we've already enrolled the user.
-            const identity = await wallet.get(user.pki);
+            const identity = await wallet.get(userPki);
             if (!identity) {
-                console.log(`An identity for the user "${user.pki}" already exists in the wallet`);
+                console.log(`An identity for the user "${userPki}" not exists in the wallet`);
                 return null;
             }
 
             // Create a new gateway for connecting to our peer node.
             const gateway = new Gateway();
-            await gateway.connect(ccp, { wallet, identity: user.pki, discovery: { enabled: true, asLocalhost: true } });
+            await gateway.connect(ccp, { wallet, identity: userPki, discovery: { enabled: true, asLocalhost: true } });
 
             // Get the network (channel) our contract is deployed to.
             const network = await gateway.getNetwork(rede.nomeCanal);
 
             // Get the contract from the network.
-            const contract = network.getContract('fastenetwork');
+            const contract = network.getContract('fastenetwork', 'ProArticle');
 
             // Evaluate the specified transaction.
             const result = await contract.evaluateTransaction('queryAllData');
