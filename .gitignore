@@ -129,5 +129,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-networks/
+networks/rede2
 tmp/
