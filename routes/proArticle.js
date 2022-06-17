@@ -214,7 +214,7 @@ router.post('/save', async (req, res) => {
          console.log(status)
          await relationship.wasGeneratedBy(entity, activitySendDocument, companyOrigin);
 
-         res.redirect('/transaction?msg=usererror');
+         res.redirect('/pro_article?msg=usererror');
 
       } else if(resultTransaction == 3) {
          const status = "internal error"
@@ -237,7 +237,7 @@ router.post('/save', async (req, res) => {
          console.log(status)
          await relationship.wasGeneratedBy(entity, activitySendDocument, companyOrigin);
          
-         res.redirect('/transaction?msg=internalerror');
+         res.redirect('/pro_article?msg=internalerror');
       }
 
       const query = {name: documetName}
