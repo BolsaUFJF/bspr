@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const baseURL = process.env.API_URL;
 
-const DocumentDatabase = require("../database/models/DocumentModel");
+const DocumentDatabase = require("../../models/DocumentModel");
 
 async function getEntityByName(name) {
   var document = await DocumentDatabase.findOne({ name: name });

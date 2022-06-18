@@ -2,27 +2,22 @@ const express = require('express');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
-const multerConfig = require('../app/config/multer')
 const atob = require("atob");
-
 var base64 = require('file-base64');
 
-const invoke = require('../app/transaction/invoke')
-const query = require('../app/transaction/query')
+const multerConfig = require('../controllers/config/multer')
+const invoke = require('../controllers/transaction/invoke')
+const query = require('../controllers/transaction/query')
 
 // const RedeDatabase = require('../app/database/models/RedeModel')
-const UserDatabase = require('../app/database/models/UserModel')
-const CompanyDatabase = require('../app/database/models/CompanyModel')
-const DocumentDatabase = require('../app/database/models/DocumentModel')
+const UserDatabase = require('../models/UserModel')
+const CompanyDatabase = require('../models/CompanyModel')
+const DocumentDatabase = require('../models/DocumentModel')
 
-const relationship = require('../app/integrateApi/relationships');
-const provenanceData = require('../app/integrateApi/provenanceData')
-
-const provToBlockchain = require('../app/integrateApi/provToBlockchain')
+const relationship = require('../controllers/integrateApi/relationships');
+const provenanceData = require('../controllers/integrateApi/provenanceData');
 
 const rede = require("../network.json")
-
-const axios = require('axios');
 
 function parseJwt(token) {
    var base64Url = token.split('.')[1];

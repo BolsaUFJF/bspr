@@ -33,7 +33,7 @@ async function startNetwork(networkName) {
    // });
 
 	shell.cd(__dirname);
-	shell.cd("../..");
+	shell.cd("..");
 }
 
 async function stopNetwork(networkName) {
@@ -44,7 +44,7 @@ async function stopNetwork(networkName) {
 	shell.exec("./network.sh down");
 
 	shell.cd(__dirname);
-	shell.cd("../..");
+	shell.cd("..");
 }
 
 module.exports = {

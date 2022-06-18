@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const UserDatabase = require("../app/database/models/UserModel");
-const CompanyDatabase = require("../app/database/models/CompanyModel");
+const UserDatabase = require("../models/UserModel");
+const CompanyDatabase = require("../models/CompanyModel");
 const rede = require("../network.json")
-const enrollAdmin = require('../app/transaction/enrollAdmin')
-const scripts = require("../app/controller/scripts")
+const enrollAdmin = require('../controllers/transaction/enrollAdmin')
+const scripts = require("../controllers/scripts")
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

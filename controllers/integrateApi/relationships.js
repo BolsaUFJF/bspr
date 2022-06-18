@@ -2,8 +2,8 @@ const axios = require('axios');
 require("dotenv").config();
 // const integrate = require('./integrate').getBaseRoute();
 
-const provToBlockchain = require('../integrateApi/provToBlockchain')
-const convertJWT = require('../controller/convertJWT')
+const provToBlockchain = require('./provToBlockchain')
+const convertJWT = require('../convertJWT')
 
 const baseURL = process.env.API_URL;
 

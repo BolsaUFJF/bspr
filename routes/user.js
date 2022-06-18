@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const rede = require("../network.json")
-const UserDatabase = require("../app/database/models/UserModel");
-const registerUser = require("../app/transaction/registerUserOrg");
+const UserDatabase = require("../models/UserModel");
+const registerUser = require("../controllers/transaction/registerUserOrg");
 
 router.get("/", (req, res) => {
 	res.render("userOrg1/index", {

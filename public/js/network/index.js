@@ -1,19 +1,12 @@
-$(document).on('click', '.startNetwork', function () { 
+$(document).on('click', '.startNetwork', async function () { 
     
     var _idNetwork = $(this).data('_idrede');
 
     var networkName = document.getElementById('networkName').value
 
-    axios.get('/network/start/' + networkName)
+    await axios.get('/network/start/' + networkName)
     .then(function (response) {
         console.log(response.data)
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-    .finally(function () {
-        // always executed
     });
 });
 

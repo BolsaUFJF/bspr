@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const mongodb = require('../app/database/mongodb/Server'); //Connection to database
+//Connection to database
+const mongodb = require('../controllers/mongodb/Server'); 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
