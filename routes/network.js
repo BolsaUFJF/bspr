@@ -17,15 +17,15 @@ router.get("/start/:networkName", async (req, res) => {
 	const name = req.params.networkName;
 	console.log(name);
 
-	await scripts.startNetwork(name);
+	const x = await scripts.startNetwork(name);
+	console.log(x);
 
-	if (name == "rede2") res.redirect("/network?msg=success");
-	else res.redirect("/network?msg=error");
+	res.send(JSON.parse('{"response":"success"}'));
 });
 
 router.get('/stop/:networkName', async (req, res)=>{
 	const name = req.params.networkName;
-	console.log(name);
+	// console.log(name);
 
 	await scripts.stopNetwork(name);
 
@@ -37,8 +37,7 @@ router.get('/stop/:networkName', async (req, res)=>{
 	});
 
 	// console.log(__dirname)
-	if (name == "rede2") res.redirect("/network?msg=success");
-	else res.redirect("/network?msg=error");
+	res.send(JSON.parse('{"response":"success"}'));
 });
 
 router.get("/listarRedes", function (req, res, next) {

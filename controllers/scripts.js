@@ -34,6 +34,7 @@ async function startNetwork(networkName) {
 
 	shell.cd(__dirname);
 	shell.cd("..");
+   return 0;
 }
 
 async function stopNetwork(networkName) {

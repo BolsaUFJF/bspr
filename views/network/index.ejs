@@ -15,51 +15,55 @@
           <div class="col-lg-12">
 
             <div class="card">
-              <div class="card-title">
-                <h3>Network</h3>
-              </div>
-              <br>
-
-              <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="labelNetworkName">Rede:</label>
-                  <select class="form-control networkName" aria-label="Selecione a rede" id="networkName" name="networkName">
-                    <!-- <option value="rede" selected>rede</option> -->
-                    <option value="rede2" selected>rede2</option>
-                  </select>
+              
+              <div id="form-load">
+                <div class="card-title">
+                  <h3>Network</h3>
                 </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12" style="text-align: center; font-size: x-large;">                  
-                  <h3 style="text-align: center;">Configuration</h3>
-                  <div class='col-lg-12'>
-                    <div class='row'>
-                        <div class='col-lg-6' style='text-align: center;'>
-                            <a class='btn btn-success startNetwork' title = 'Inicializar rede' href='javascript:void(0)' data-_idrede='rede2'>Inicializar rede</a>
-                        </div>
-                        <div class='col-lg-6' style='text-align: center;'>
-                            <a class='btn btn-danger stopNetwork' title = 'Parar rede' href='javascript:void(0)' data-_idrede='rede2'>Parar rede</a>
-                        </div>
+                <br>
+  
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="labelNetworkName">Rede:</label>
+                    <select class="form-control networkName" aria-label="Selecione a rede" id="networkName" name="networkName">
+                      <!-- <option value="rede" selected>rede</option> -->
+                      <option value="rede2" selected>rede2</option>
+                    </select>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-12" style="text-align: center; font-size: x-large;">               
+                    <h3 style="text-align: center;">Configuration</h3>
+                    <div class='col-lg-12'>
+                      <div class='row'>
+                          <div class='col-lg-6' style='text-align: center;'>
+                              <a class='btn btn-success startNetwork' title = 'Inicializar rede' href='javascript:void(0)' data-_idrede='rede2'>Inicializar rede</a>
+                          </div>
+                          <div class='col-lg-6' style='text-align: center;'>
+                              <a class='btn btn-danger stopNetwork' title = 'Parar rede' href='javascript:void(0)' data-_idrede='rede2'>Parar rede</a>
+                          </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12" style="text-align: center; font-size: x-large;">                  
-                  <h3 style="text-align: center;">Admins</h3>
-                  <div class='col-lg-12'>
-                    <div class='row'>
-                        <div class='col-lg-12' style='text-align: center;'>
-                            <a class='btn btn-success enrollAdmin' title = 'Enroll Admin' href='javascript:void(0)' data-_idrede='rede2'>Cadastrar Administrador</a>
-                        </div>
+  
+                <div class="row">
+                  <div class="col-md-12" style="text-align: center; font-size: x-large;">                  
+                    <h3 style="text-align: center;">Admins</h3>
+                    <div class='col-lg-12'>
+                      <div class='row'>
+                          <div class='col-lg-12' style='text-align: center;'>
+                              <a class='btn btn-success enrollAdmin' title = 'Enroll Admin' href='javascript:void(0)' data-_idrede='rede2'>Cadastrar Administrador</a>
+                          </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+  
               </div>
-
-              <div class="loader-5 center" hidden><span></span></div>
+              
+              <div class="lds-dual-ring loading-animation" id="loading-animation" hidden></div>   
 
             </div>
           </div>
