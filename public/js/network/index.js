@@ -5,17 +5,17 @@ $(document).on('click', '.startNetwork', async function () {
 
     var networkName = document.getElementById('networkName').value
 
-    // await axios.get('/network/start/' + networkName)
-    // .then(function (response) {
-    //     console.log(response);
-    // })
-    // .catch(function (error) {
-    //     // handle error
-    //     console.log(error);
-    // })
-    // .finally(function () {
-    //     stopAimation();
-    // });
+    await axios.get('/network/start/' + networkName)
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .finally(function () {
+        stopAimation();
+    });
 
     // try {
     //     const resp = await axios.get('/network/start/' + networkName);
