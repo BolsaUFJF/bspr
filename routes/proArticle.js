@@ -141,7 +141,7 @@ router.post('/save', async (req, res) => {
          "data": {
             "status": status,
             "code": "0x0001d",
-            "message": "Company " + companyOrigin + " not find",
+            "message": "Company " + companyDestination + " not find",
             "when": "create transaction"
          }
       }
@@ -187,6 +187,14 @@ router.post('/save', async (req, res) => {
 
          await relationship.wasAssociatedWith(activitySendDocument, agent, companyOrigin)
          await relationship.used(activitySendDocument, entity, companyOrigin)
+
+         const query = {name: documetName}
+         DocumentDatabase.deleteOne(query, function (err) {
+            // if (err) res.redirect('/resultDelete?msg=error');
+            // res.redirect('/resultDelete?msg=success');
+            if(err) console.log(err);
+            console.log("Success");
+         });
 
       } else if(resultTransaction == 2) {
          const status = "invalid user"
@@ -237,14 +245,6 @@ router.post('/save', async (req, res) => {
          
          res.redirect('/pro_article?msg=internalerror');
       }
-
-      const query = {name: documetName}
-      DocumentDatabase.deleteOne(query, function (err) {
-         // if (err) res.redirect('/resultDelete?msg=error');
-         // res.redirect('/resultDelete?msg=success');
-         if(err) console.log(err);
-         console.log("Success");
-      });
 
       res.redirect('/pro_article?msg=success');
    }
