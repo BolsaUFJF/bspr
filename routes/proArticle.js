@@ -129,7 +129,7 @@ router.post('/save', async (req, res) => {
       const status = "Company Destination not find"
 
       const activitySendDocument = {
-         "name": "Send Document ",
+         "name": "Create Error",
          "provType": "send-document",
          "start_time": 0,
          "end_time": 0
@@ -141,7 +141,8 @@ router.post('/save', async (req, res) => {
          "data": {
             "status": status,
             "code": "0x0001d",
-            "message": "Company " + companyOrigin + " not find"
+            "message": "Company " + companyOrigin + " not find",
+            "when": "create transaction"
          }
       }
       console.log(status)
@@ -191,7 +192,7 @@ router.post('/save', async (req, res) => {
          const status = "invalid user"
 
          const activitySendDocument = {
-            "name": "Send Document ",
+            "name": "Create Error",
             "provType": "send-document",
             "start_time": 0,
             "end_time": 0
@@ -203,7 +204,8 @@ router.post('/save', async (req, res) => {
             "data": {
                "status": status,
                "code": "0x0001f",
-               "message": "Invalid User"
+               "message": "Invalid User on wallet",
+               "when": "create transaction"
             }
          }
          console.log(status)
@@ -214,7 +216,7 @@ router.post('/save', async (req, res) => {
       } else if(resultTransaction == 3) {
          const status = "internal error"
          const activitySendDocument = {
-            "name": "Send Document ",
+            "name": "Create Error",
             "provType": "send-document",
             "start_time": 0,
             "end_time": 0
@@ -226,7 +228,8 @@ router.post('/save', async (req, res) => {
             "data": {
                "status": status,
                "code": "0x0001c",
-               "message": "Internal Error"
+               "message": "Internal error on blockchain network",
+               "when": "create transaction"
             }
          }
          console.log(status)
@@ -292,14 +295,14 @@ router.post('/uploadData', multer(multerConfig).single('file'), async (req, res)
    })
    const endConversion = new Date().getTime();
 
-   activityConvertBase = {
+   const activityConvertBase = {
       "name": "Convert Document " + req.file.originalname,
       "provType": "convert-document",
       "start_time": startConversion,
       "end_time": endConversion
    }
 
-   entityDocumentBase = {
+   const entityDocumentBase = {
       "name": "Base 64 - " + req.file.originalname,
       "provType": "document-base",
       "data": {
@@ -324,9 +327,6 @@ router.post('/uploadData', multer(multerConfig).single('file'), async (req, res)
       })
       documentDatabase.save()
    }
-
-
-
    console.log("ok");
    res.redirect('/pro_article?msg=uploadsuccess');
 })
