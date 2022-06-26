@@ -172,7 +172,6 @@ router.post('/save', async (req, res) => {
             "provType": "agent-user",
             "data": {
                "pki": resultCompanyOrigin.pki,
-               "network": resultCompanyOrigin.network
             }
          }
 
@@ -341,6 +340,8 @@ router.get('/getTransactions', async (req, res) => {
    var provData = [];
 
    const jsonData = JSON.parse(data);
+   // console.log(data);
+   // console.log(jsonData);
 
    jsonData.forEach(element => {
       if(element.Key.includes("Block")) {
@@ -351,7 +352,7 @@ router.get('/getTransactions', async (req, res) => {
       }
    });
 
-   console.log(blockData[0]);
+   console.log(provData);
 
    res.send(blockData);
 })
