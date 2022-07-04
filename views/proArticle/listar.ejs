@@ -16,17 +16,17 @@
 
             <div class="card">
               <div class="card-title">
-                <h3>Companies</h3>
+                <h3>Transactions</h3>
               </div>
               <br>
 
-              <table class="table" id="tableListUsers">
+              <table class="table" id="tableListTransactions">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Key</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Prov Type</th>
+                    <th scope="col">User Sender</th>
+                    <th scope="col">User Reciver</th>
                     <th scope="col">Requisition</th>
                     <th></th>
                   </tr>
@@ -34,8 +34,24 @@
                 <tbody id="tableListUsersList"></tbody>
               </table>
 
-
+              <table class="table" id="tableTransactionInfo" hidden>
+                <thead>
+                  <tr>
+                    <th scope="col">Filename</th>
+                    <th scope="col">Mime</th>
+                    <!-- <th scope="col">Base64</th> -->
+                    <th scope="col"></th>
+                  </tr>              
+                </thead>
+                <tbody id="transactionInfo">
+                  
+                </tbody>                
+              </table>
+              
             </div>
+
+
+            
           </div>
 
         </div>

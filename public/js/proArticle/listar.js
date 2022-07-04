@@ -9,15 +9,11 @@ window.onload = function start() {
          conteudo += "<tr>";
              conteudo += "<td>" + i + "</td>";
              conteudo += "<td>" + array[i].Key + "</td>";
-             conteudo += "<td>" + array[i].Record.document.name + "</td>";
-             conteudo += "<td>" + array[i].Record.document.provType + "</td>";
+             conteudo += "<td>" + array[i].Record.userSender + "</td>";
+             conteudo += "<td>" + array[i].Record.userReciver + "</td>";
              conteudo += "<td>" + array[i].Record.requisition + "</td>";
              conteudo += "<td>";
-               // conteudo += "<form id='deleteRede' method='POST' action='/user/delete' enctype='application/json'>";
-               // conteudo += "<input type='hidden' name='userId' id='userId' value='" + array[i].Key + "'>";
-               // conteudo += "<input type='hidden' name='userName' id='userName' value='" + array[i].nome + "'>";
-               // conteudo += "<button type='submit'  class='btn btn-link' title='Excluir Usuário' > <i class='color-danger ti-trash' style='font-size: 20px;'></i> </button>";
-               // conteudo += "</form>";
+                conteudo += "<a class='infoTransaction' title = 'Info Transaction' href='javascript:void(0)' data-_idtransaction='" + i + "'><i class='color-info ti-info-alt' style='font-size: 20px;'></i></a>";
             conteudo += "</td>";
          conteudo += "</tr>";
 
@@ -34,3 +30,32 @@ window.onload = function start() {
        // always executed
    });
 }
+
+$(document).on('click', '.infoTransaction', function () {
+    var _idTransaction = $(this).data('_idtransaction');
+    data = array[_idTransaction].Record.document
+    conteudo = "";
+
+    conteudo += "<tr>";
+        conteudo += "<td>" + data.name + "</td>";
+        conteudo += "<td>" + data.data.mime + "</td>";
+        // conteudo += "<td style='word-wrap: break-all'>" + data.data.base + "</td>";
+        conteudo += "<td>";
+            conteudo += "<a class='closeInfo' title='Voltar' href='javascript:void(0)'> <i class='ti-arrow-circle-left' style='font-size: 20px;'></i> </a>";
+        conteudo += "</td>";
+
+    conteudo += "</tr>";
+
+    document.getElementById("transactionInfo").innerHTML = conteudo;
+
+    document.getElementById('tableTransactionInfo').hidden = false
+    // document.getElementById('divRedeInfo').hidden = false
+    document.getElementById('tableListTransactions').hidden = true
+})
+
+$(document).on('click', '.closeInfo', function () { 
+    document.getElementById('tableTransactionInfo').hidden = true
+    // document.getElementById('divRedeInfo').hidden = true
+    document.getElementById('tableListTransactions').hidden = false
+
+});

@@ -17,6 +17,8 @@ const DocumentDatabase = require('../models/DocumentModel')
 const relationship = require('../controllers/integrateApi/relationships');
 const provenanceData = require('../controllers/integrateApi/provenanceData');
 
+const convertJWT = require('../controllers/convertJWT')
+
 const rede = require("../network.json")
 
 function parseJwt(token) {
@@ -345,14 +347,18 @@ router.get('/getTransactions', async (req, res) => {
 
    jsonData.forEach(element => {
       if(element.Key.includes("Block")) {
+         element.Key = element.Key.replace("Block:", "");
          element.Record.document = JSON.parse(element.Record.document);
+         element.Record.document.data = convertJWT.decode(element.Record.document.data)
+         console.log(element)
+         console.log(element.Record.document)
          blockData.push(element);
       } else if(element.Key.includes("Prov")) {
          provData.push(element);
       }
    });
 
-   console.log(provData);
+   // console.log(blockData);
 
    res.send(blockData);
 })
