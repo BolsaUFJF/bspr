@@ -288,7 +288,7 @@ router.post('/uploadData', multer(multerConfig).single('file'), async (req, res)
       }
    }
 
-   await relationship.wasGeneratedBy(entityDocumentData, activityCreateDocument,user.pki);
+   await relationship.wasGeneratedBy(entityDocumentData, activityCreateDocument, user.pki);
    await relationship.wasAssociatedWith(activityCreateDocument, agent, user.pki);
 
    const startConversion = new Date().getTime();
