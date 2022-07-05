@@ -277,12 +277,11 @@ router.post('/uploadData', multer(multerConfig).single('file'), async (req, res)
       "name": user.nome,
       "provType": "agent-user",
       "data": {
-         "pki": user.pki,
-         "network": user.network
+         "pki": user.pki
       }
    }
 
-   await relationship.wasGeneratedBy(entityDocumentData, activityCreateDocument), user.pki;
+   await relationship.wasGeneratedBy(entityDocumentData, activityCreateDocument, user.pki);
    await relationship.wasAssociatedWith(activityCreateDocument, agent, user.pki);
 
    const startConversion = new Date().getTime();
