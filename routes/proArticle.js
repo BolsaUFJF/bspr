@@ -174,6 +174,9 @@ router.post('/save', async (req, res) => {
             "provType": "agent-user",
             "data": {
                "pki": resultCompanyOrigin.pki,
+               "cargo": resultCompanyOrigin.cargo,
+               "cpf": resultCompanyOrigin.cpf,
+               "idade": resultCompanyOrigin.idade
             }
          }
 
@@ -254,6 +257,7 @@ router.post('/save', async (req, res) => {
 router.post('/uploadData', multer(multerConfig).single('file'), async (req, res) => {
    const start = new Date().getTime()
    var user = await UserDatabase.findOne({ pki: req.body.userPki })
+   console.log(user)
 
    const activityCreateDocument = {
       "name": "Create Document ",
@@ -278,11 +282,13 @@ router.post('/uploadData', multer(multerConfig).single('file'), async (req, res)
       "provType": "agent-user",
       "data": {
          "pki": user.pki,
-         "network": user.network
+         "cargo": user.cargo,
+         "cpf": user.cpf,
+         "idade": user.idade
       }
    }
 
-   await relationship.wasGeneratedBy(entityDocumentData, activityCreateDocument), user.pki;
+   await relationship.wasGeneratedBy(entityDocumentData, activityCreateDocument,user.pki);
    await relationship.wasAssociatedWith(activityCreateDocument, agent, user.pki);
 
    const startConversion = new Date().getTime();
