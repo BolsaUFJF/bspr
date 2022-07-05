@@ -17,7 +17,8 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/save", async (req, res) => {
-	const { nome, descricao, permissao, pki } = req.body;
+	const { username, age, cpf, phoneNumber, office, permission, pki, description } = req.body;
+	console.log(req.body)
 
 	// Efetua cadastro do usuário na blockchain
 	if(rede.isOnline === true) {
@@ -31,10 +32,14 @@ router.post("/save", async (req, res) => {
 		res.redirect('/user/get');
 	} else if (result === 1) {
 		const userDatabase = new UserDatabase({
-			nome: nome,
-			descricao: descricao,
-			permissao: permissao,
-			pki: pki
+			username: username,
+			cpf: cpf,
+		  	idade: age,
+		  	telefone: phoneNumber,
+		  	cargo: office,
+		  	descricao: description,
+		  	permissao: permission,
+		  	pki: pki
 		});
 		await userDatabase.save();
 		res.redirect('/user/get');
