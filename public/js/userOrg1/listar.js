@@ -8,10 +8,12 @@ window.onload = function start() {
         for (let i = 0; i < users.length; i++) {
           conteudo += "<tr>";
               conteudo += "<td>" + i + "</td>";
-              conteudo += "<td>" + users[i].nome + "</td>";
-              conteudo += "<td>" + users[i].descricao + "</td>";
+              conteudo += "<td>" + users[i].username + "</td>";
+              conteudo += "<td>" + users[i].cargo + "</td>";
               conteudo += "<td>" + users[i].permissao + "</td>";
               conteudo += "<td>" + users[i].pki + "</td>";
+              conteudo += "<td>" + users[i].cpf + "</td>";
+              conteudo += "<td>" + users[i].idade + "</td>";
               conteudo += "<td>";
                 conteudo += "<form id='deleteRede' method='POST' action='/user/delete' enctype='application/json'>";
                 conteudo += "<input type='hidden' name='userId' id='userId' value='" + users[i]._id + "'>";
