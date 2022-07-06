@@ -121,11 +121,15 @@ router.post('/save', async (req, res) => {
    const timestamp = Date.now();
 
 
+   console.log(req.body)
+
    const requisition = "Send Document"
 
    var resultCompanyOrigin = await UserDatabase.findOne({ pki: companyOrigin })
    var resultCompanyDestination = await CompanyDatabase.findOne({ pki: companyDestination })
    var document = await provenanceData.getEntityByName(documetName);
+
+   console.log(resultCompanyDestination)
 
    if (resultCompanyDestination === null) {
       const status = "Company Destination not find"
@@ -170,13 +174,13 @@ router.post('/save', async (req, res) => {
          var entity = document;
 
          const agent = {
-            "name": resultCompanyOrigin.nome,
+            "name": resultCompanyOrigin.username,
             "provType": "agent-user",
             "data": {
                "pki": resultCompanyOrigin.pki,
-               "cargo": resultCompanyOrigin.cargo,
                "cpf": resultCompanyOrigin.cpf,
-               "idade": resultCompanyOrigin.idade
+               "idade": resultCompanyOrigin.idade,
+               "cargo": resultCompanyOrigin.cargo
             }
          }
 
@@ -189,8 +193,8 @@ router.post('/save', async (req, res) => {
 
          entity.data = parseJwt(entity.data);
 
-         await relationship.wasAssociatedWith(activitySendDocument, agent, companyOrigin)
-         await relationship.used(activitySendDocument, entity, companyOrigin)
+         await relationship.wasAssociatedWith(activitySendDocument, agent, resultCompanyOrigin.pki)
+         await relationship.used(activitySendDocument, entity, resultCompanyOrigin.pki)
 
          const query = {name: documetName}
          DocumentDatabase.deleteOne(query, function (err) {
@@ -278,13 +282,13 @@ router.post('/uploadData', multer(multerConfig).single('file'), async (req, res)
    }
 
    const agent = {
-      "name": user.nome,
+      "name": user.username,
       "provType": "agent-user",
       "data": {
          "pki": user.pki,
-         "cargo": user.cargo,
          "cpf": user.cpf,
-         "idade": user.idade
+         "idade": user.idade,
+         "cargo": user.cargo
       }
    }
 
