@@ -261,6 +261,7 @@ router.post('/save', async (req, res) => {
 router.post('/uploadData', multer(multerConfig).single('file'), async (req, res) => {
    const start = new Date().getTime()
    var user = await UserDatabase.findOne({ pki: req.body.userPki })
+   console.log(user)
 
    const activityCreateDocument = {
       "name": "Create Document ",
