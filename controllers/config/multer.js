@@ -25,7 +25,9 @@ module.exports = {
          "text/plain"
       ];
 
-      if(allowedMimes.includes(file.mimetype)) {
+      const isImage = file.mimetype.startsWith('image/');
+
+      if(allowedMimes.includes(file.mimetype) || isImage) {
          cb(null, true);
       } else {
          cb(new Error("Invalid file type."))
